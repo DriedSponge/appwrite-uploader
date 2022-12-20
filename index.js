@@ -9,15 +9,21 @@ async function upload(){
     client.setEndpoint(process.env.APPWRITE_ENDPOINT)
     client.setProject(process.env.APPWRITE_PROJECT_ID)
     const storage = new sdk.Storage(client);
-    files.map((file)=>{
-        console.log(`Preparing ${file}...`);
+    let i = 1
+    for (const file of files) {
+        let progress = `${i}/${files.length}`
+        console.log(`[${progress}] Preparing ${file}...`);
         let directory = `./uploads/${file}`
-        storage.createFile(process.env.APPWRITE_BUCKET,file,InputFile.fromPath(directory, file)).then((res)=>{
-            console.log(`Finished uploading ${file}.`)
-        }).catch((err)=>{
-                console.error(`Could not upload ${file}. ${err}`)
-        })
-    })
+        try{
+            await storage.createFile(process.env.APPWRITE_BUCKET,file,InputFile.fromPath(directory, file))
+            console.log(`[${progress}] Finished uploading ${file}.`)
+        }catch (e) {
+            console.error(`Could not upload ${file}. ${e}`)
+        }
+        i++;
+
+    }
+    console.log("Done!")
 }
 
 upload();
