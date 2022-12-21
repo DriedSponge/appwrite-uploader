@@ -9,9 +9,9 @@ async function upload(){
     client.setEndpoint(process.env.APPWRITE_ENDPOINT)
     client.setProject(process.env.APPWRITE_PROJECT_ID)
     const storage = new sdk.Storage(client);
-    let i = 1
-    for (const file of files) {
-        let progress = `${i}/${files.length}`
+    for (let i = 0; i<files.length;i++) {
+        let progress = `${i+1}/${files.length}`
+        let file = files[i];
         console.log(`[${progress}] Preparing ${file}...`);
         let directory = `./uploads/${file}`
         try{
@@ -24,11 +24,12 @@ async function upload(){
 
     }
     if(process.env.DELETE_WHEN_DONE) {
-        let i = 1;
-        for (const file of files) {
-            let progress = `${i}/${files.length}`
+        for (let i = 0; i<files.length;i++) {
+            let progress = `${i+1}/${files.length}`
+            let file = files[i];
             fs.unlinkSync(`./uploads/${file}`)
             console.log(`[${progress}] Deleted ${file}`)
+            i++
         }
     }
     console.log("Done!")
