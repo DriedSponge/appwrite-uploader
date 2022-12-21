@@ -3,7 +3,7 @@
 This script make it easy to upload a mass amount of files to an
 [Appwrite](https://appwrite.io) bucket. It's simple to use.
 
-1. Clone the git repo: `git clone https://github.com/driedsponge/appwrite-uploader`
+1. Clone the git repo: `git clone https://github.com/DriedSponge/appwrite-uploader.git`
 2. Install dependencies: `pnpm install` or `npm install`
 3. Clone `example.env` to `.env` and fill out the configuration
 with the details of your Appwrite project. If `DELETE_WHEN_DONE` is set to true,
