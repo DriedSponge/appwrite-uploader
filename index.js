@@ -23,6 +23,14 @@ async function upload(){
         i++;
 
     }
+    if(process.env.DELETE_WHEN_DONE) {
+        let i = 1;
+        for (const file of files) {
+            let progress = `${i}/${files.length}`
+            fs.unlinkSync(`./uploads/${file}`)
+            console.log(`[${progress}] Deleted ${file}`)
+        }
+    }
     console.log("Done!")
 }
 
