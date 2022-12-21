@@ -20,7 +20,6 @@ async function upload(){
         }catch (e) {
             console.error(`Could not upload ${file}. ${e}`)
         }
-        i++;
 
     }
     if(process.env.DELETE_WHEN_DONE) {
@@ -29,7 +28,6 @@ async function upload(){
             let file = files[i];
             fs.unlinkSync(`./uploads/${file}`)
             console.log(`[${progress}] Deleted ${file}`)
-            i++
         }
     }
     console.log("Done!")
